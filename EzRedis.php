@@ -1,6 +1,7 @@
 <?php
 class EzRedis extends EzCache
 {
+    protected static $ins;
     protected $tcp = null;
 
     protected $mode = 1;
@@ -35,6 +36,7 @@ class EzRedis extends EzCache
     public function connect($host = '127.0.0.1', $port = 6379, $timeout = 0){
         $this->tcp = EzTCP::get($host, $port);
         $this->mode = self::MODE_SINGLE;
+        //var_dump($this);
     }
 
     public function connectCluster(string $clusterName, $timeout = 0){
