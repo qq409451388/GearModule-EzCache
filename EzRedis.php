@@ -34,9 +34,8 @@ class EzRedis extends EzCache
     private const REQ_OK = "OK";
 
     public function connect($host = '127.0.0.1', $port = 6379, $timeout = 0){
-        $this->tcp = EzTCP::get($host, $port);
+        $this->tcp = EzTcpLite::get($host, $port);
         $this->mode = self::MODE_SINGLE;
-        //var_dump($this);
     }
 
     public function connectCluster(string $clusterName, $timeout = 0){
