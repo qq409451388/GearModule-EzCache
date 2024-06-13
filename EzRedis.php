@@ -35,6 +35,7 @@ class EzRedis extends EzCache
 
     public function connect($host = '127.0.0.1', $port = 6379, $timeout = 0){
         $this->tcp = EzTcpLite::get($host, $port);
+        $this->tcp->keepAlive();
         $this->mode = self::MODE_SINGLE;
     }
 
@@ -48,7 +49,7 @@ class EzRedis extends EzCache
     private function connectWithCluster(array $configs, $timeout = 0){
         foreach($configs as $config){
             $configArr = explode(":", $config);
-            $this->tcp[$config] = EzTCP::get($configArr[0], $configArr[1]);
+            $this->tcp[$config] = EzTcpLite::get($configArr[0], $configArr[1]);
         }
         $this->mode = self::MODE_CLUSTER;
     }
