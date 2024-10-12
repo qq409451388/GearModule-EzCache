@@ -30,6 +30,6 @@ class CacheFactory
     private static function getCacheClient($cacheType) {
         $cacheClass = self::$cacheMap[$cacheType]??"";
         DBC::assertNotEmpty($cacheClass, "[CacheFactory Exception] Unknow CacheType!");
-        return new $cacheClass();
+        return BeanFinder::get()->fetch($cacheClass);
     }
 }

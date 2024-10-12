@@ -544,8 +544,8 @@ class EzLocalCache extends EzCache
         return true;
     }
 
-    public function putSource(string $k, array $v) {
-        if (EzObjectUtils::isList($v)) {
+    public function putSource(string $k, $v) {
+        if (EzCheckUtils::isList($v)) {
             $this->_concurrentHashMap[$k] = EzLocalCacheObject::create($v, null, EzLocalCacheObject::T_LIST);
         } else {
             $this->_concurrentHashMap[$k] = EzLocalCacheObject::create($v, null, EzLocalCacheObject::T_HASH);
