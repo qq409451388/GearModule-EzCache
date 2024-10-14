@@ -1,5 +1,5 @@
 <?php
-abstract class EzCache implements IEzCacheSystem,IEzCacheKey,IEzCacheString,IEzCacheList,IEzCacheHash
+abstract class EzCache implements IEzCacheSystem, IEzCacheKey, IEzCacheString, IEzCacheList, IEzCacheHash, EzSingleton
 {
     public static function getInstance():EzCache {
         return new static();
