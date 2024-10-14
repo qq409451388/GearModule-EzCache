@@ -545,6 +545,9 @@ class EzLocalCache extends EzCache
     }
 
     public function putSource(string $k, $v) {
+        if (is_null($v)) {
+            return;
+        }
         if (EzCheckUtils::isList($v)) {
             $this->_concurrentHashMap[$k] = EzLocalCacheObject::create($v, null, EzLocalCacheObject::T_LIST);
         } else {
@@ -552,7 +555,29 @@ class EzLocalCache extends EzCache
         }
     }
 
+/*    public function putSourceMap(string $k, $v, ...$mapKeys) {
+        $map = $this->getSourceMap($k);
+        if (empty($map)) {
+            return;
+        }
+        $tmp = &$map;
+        foreach ($mapKeys as $mapKey) {
+            if (!isset($tmp[$mapKey])) {
+                return; // 或者抛出异常，或者返回 false 表示失败
+            }
+            $tmp = &$tmp[$mapKey];
+        }
+        $tmp = $v;
+    }*/
+
     public function getSource(string $k) {
+        if (!$this->has($k)) {
+            return null;
+        }
+        return $this->_concurrentHashMap[$k]->dataSource;
+    }
+
+    public function getSourceMap(string $k) {
         if (!$this->has($k)) {
             return null;
         }

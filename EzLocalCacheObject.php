@@ -27,6 +27,8 @@ class EzLocalCacheObject
     public const T_LIST = 4;
     public const T_HASH = 5;
 
+    //public const T_FILE = 6;
+
     private static $dataTypeDesc = [
         self::T_STRING => "基础类型",
         self::T_INT => "基础类型",
